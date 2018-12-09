@@ -1,0 +1,18 @@
+UI MANAGER
+Switches the states between the different scenes (Menu, Card Create, Manage). Uses an enum (with ints) in order to switch states.
+
+
+CARD CREATION
+/// Controls the popup for creating a new card. Allows you to accept user input and then talks with the CardDataController to create new cards
+/// to be added into the database
+
+
+PROCESS OF CREATING A CARD:
+- Open the CardCreation Popup
+- Input a new task. This is sent to CardDataController which then adds a new card to the database.
+- To display the card, the CardDataController also adds a new UI element
+
+
+PROCESS OF DRAWING A CARD 
+- CardDrawController controls this process.
+- When drawing, get a random card from the deck. Then you will see that task and be called on to do it. 
