@@ -10,9 +10,13 @@ using UnityEngine.UI;
 public class CardUI : MonoBehaviour {
 
     public Text taskText;
+    public Text timesUsed;
+    public CardData cardDataReference;              //stores a reference to the card data so it can find itself in a list. 
+    private CardDataController cardDataController;
+
 	// Use this for initialization
 	void Start () {
-		
+        cardDataController = FindObjectOfType<CardDataController>();
 	}
 	
 	// Update is called once per frame
@@ -20,11 +24,22 @@ public class CardUI : MonoBehaviour {
 		
 	}
 
+    //sends a command to the manager to delete the card from the system
+    public void DeleteCard()
+    {
+        cardDataController.RemoveCard(cardDataReference);
+        
+    }
+
     //takes a task and sets up the card to be used. 
     public void Init(CardData cardData)
     {
         taskText.text = cardData.cardTask;
+        timesUsed.text = cardData.timesUsed.ToString() ;
+        cardDataReference = cardData;
     }
+
+
 
 }
 

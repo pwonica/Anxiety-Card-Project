@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class CardData
 {
     public string cardTask;
@@ -12,9 +13,4 @@ public class CardData
     private int usefullnessScore;
     public int timesUsed;
 
-    public CardData(string whichTask)
-    {
-        cardTask = whichTask;
-        //genereate a random id for this
-    }
 }

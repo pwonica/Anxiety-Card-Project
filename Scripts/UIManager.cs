@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Menu = 0, CardTask = 1, CardManage = 2
 public enum UIState { Menu, GetCard, CardManage}
@@ -8,18 +9,46 @@ public enum UIState { Menu, GetCard, CardManage}
 public class UIManager : MonoBehaviour {
 
     public GameObject[] activeScreens;
-    private UIState currentScreen; 
-    
+    private UIState currentScreen;
 
-	// Use this for initialization
-	void Start () {
+    private GameObject activePopup;
+    private Canvas canvas;
+    public static UIManager instance = null;
+
+
+    private void Awake()
+    {
+        if (instance == null) { instance = this; }
+        else if (instance != this) { Destroy(gameObject); }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Use this for initialization
+    void Start () {
+        canvas = FindObjectOfType<Canvas>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void CreatePopup(GameObject whichPopup)
+    {
+        activePopup = Instantiate(whichPopup) as GameObject;
+        activePopup.transform.SetParent(canvas.transform, false);
+    }
+
+    public void ClearPopup()
+    {
+        if (activePopup != null) { Destroy(activePopup); }
+    }
+
+    public void LoadScene(string whichScene)
+    {
+        SceneManager.LoadScene(whichScene);
+    }
+
 
     //takes a scene by int and opens it, closing all other scenes.
     public void OpenScreen(int whichScene)
